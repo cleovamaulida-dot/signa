@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signa | Sign Language Recognition</title>
+
+    <!-- Menghubungkan file CSS utama -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Library TensorFlow.js untuk menjalankan model Teachable Machine -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+
+    <!-- Library Teachable Machine Image -->
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+</head>
+
+<body>
+    <!-- ==================== NAVBAR ==================== -->
+    <header class="navbar">
+        <a href="#beranda" class="brand" onclick="showPage('beranda')">
+            <div class="brand-logo">
+                <img src="signa.png" alt="Logo Signa">
+            </div>
+            <span>Signa</span>
+        </a>
+
+        <nav class="nav-menu">
+            <a href="#beranda" class="nav-link active" data-page="beranda" onclick="showPage('beranda')">Beranda</a>
+            <a href="#tentang-kami" class="nav-link" data-page="tentang-kami" onclick="showPage('tentang-kami')">Tentang Kami</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ==================== BERANDA ==================== -->
+        <section id="beranda" class="page active-page">
+            <div class="hero">
+                <div class="hero-text">
+                    <p class="eyebrow">SIGN LANGUAGE RECOGNITION</p>
+                    <h1>Kenali bahasa isyarat<br><span>lebih mudah.</span></h1>
+                    <p class="hero-description">
+                        Arahkan tangan ke kamera dan Signa akan membantu mengenali
+                        alphabet bahasa isyarat secara langsung.
+                    </p>
+                </div>
+            </div>
+
+            <div class="recognition-layout">
+                <!-- Kamera -->
+                <div class="camera-card">
+                    <div class="card-heading">
+                        <div>
+                            <p class="small-label">LIVE CAMERA</p>
+                            <h2>Kamera</h2>
+                        </div>
+                        <span id="camera-status" class="status-badge">Belum aktif</span>
+                    </div>
+
+                    <div class="camera-frame">
+                        <div id="webcam-container" class="webcam-container">
+                            <div class="camera-placeholder">
+                                <div class="camera-icon">⌁</div>
+                                <p>Kamera belum dinyalakan</p>
+                                <span>Klik tombol di bawah untuk memulai</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="camera-actions">
+                        <button type="button" id="start-button" class="primary-button" onclick="init()">
+                            Mulai Kamera
+                        </button>
+                        <button type="button" id="stop-button" class="secondary-button" onclick="stopCamera()" disabled>
+                            Hentikan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Panel hasil, dibuat dengan rasio 4:3 -->
+                <div class="results-panel">
+                    <!-- Hasil terbesar -->
+                    <div class="main-result">
+                        <div class="result-title-row">
+                            <div>
+                                <p class="small-label">HASIL TERBESAR</p>
+                                <h2>Prediksi</h2>
+                            </div>
+                            <span id="prediction-confidence">0%</span>
+                        </div>
+
+                        <div class="prediction-letter" id="prediction-letter">-</div>
+                        <p id="prediction-name">Belum ada hasil</p>
+                    </div>
+
+                    <!-- Semua alphabet dan persentasenya -->
+                    <div class="all-results">
+                        <div class="result-title-row">
+                            <div>
+                                <p class="small-label">SEMUA ALPHABET</p>
+                                <h2>Hasil Prediksi</h2>
+                            </div>
+                            <span id="class-count">0 kelas</span>
+                        </div>
+
+                        <div id="label-container" class="prediction-list">
+                            <div class="empty-result">Hasil alphabet akan muncul di sini.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Petunjuk -->
+            <div class="instruction-section">
+                <div class="instruction-icon">i</div>
+                <div>
+                    <h3>Cara menggunakan</h3>
+                    <p>
+                        Klik <b>Mulai Kamera</b>, izinkan akses kamera, lalu tunjukkan
+                        alphabet bahasa isyarat di depan kamera.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TENTANG KAMI ==================== -->
+        <section id="tentang-kami" class="page">
+            <div class="about-header">
+                <p class="eyebrow">TENTANG KAMI</p>
+                <h1>Belajar bahasa isyarat,<br><span>lebih dekat dan mudah.</span></h1>
+                <p>
+                    Signa merupakan website berbasis pengenalan gambar yang dibuat
+                    untuk membantu pengguna mengenali alphabet bahasa isyarat melalui
+                    kamera. Website ini menggunakan model machine learning dari
+                    Teachable Machine untuk melakukan klasifikasi secara real-time.
+                </p>
+            </div>
+
+            <div class="about-description">
+                <div class="about-box">
+                    <span class="about-number">01</span>
+                    <h2>Tujuan</h2>
+                    <p>
+                        Membuat proses pengenalan alphabet bahasa isyarat menjadi lebih
+                        interaktif, sederhana, dan mudah digunakan oleh siswa.
+                    </p>
+                </div>
+                <div class="about-box">
+                    <span class="about-number">02</span>
+                    <h2>Teknologi</h2>
+                    <p>
+                        Website menggunakan HTML, CSS, JavaScript, TensorFlow.js, dan
+                        Teachable Machine Image Model.
+                    </p>
+                </div>
+            </div>
+
+            <div class="members-section">
+                <div class="section-heading">
+                    <p class="small-label">OUR TEAM</p>
+                    <h2>Anggota Kelompok</h2>
+                </div>
+
+                <div class="member-grid">
+                    <!-- Ganti foto dengan file pada folder assets/members -->
+                    <article class="member-card">
+                        <div class="member-photo">
+                            <img src="assets/members/ra.jpeg" alt="Foto anggota 1"
+                                 onerror="this.style.display='none'; this.parentElement.classList.add('photo-placeholder');">
+                            <span>Foto 1</span>
+                        </div>
+                        <div class="member-info">
+                            <h3>Amira Bilqis Qurrota Aini Achmadi</h3>
+                            <p>Lead Developer & Research</p>
+                        </div>
+                    </article>
+
+                    <article class="member-card">
+                        <div class="member-photo">
+                            <img src="assets/members/cleophoto.jpeg" alt="Foto anggota 2"
+                                 onerror="this.style.display='none'; this.parentElement.classList.add('photo-placeholder');">
+                            <span>Foto 2</span>
+                        </div>
+                        <div class="member-info">
+                            <h3>Cleova Enzy Maulida</h3>
+                            <p>Dataset & Documentation</p>
+                        </div>
+                    </article>
+
+                    <article class="member-card">
+                        <div class="member-photo">
+                            <img src="assets/members/ochaphoto.jpeg" alt="Foto anggota 3"
+                                 onerror="this.style.display='none'; this.parentElement.classList.add('photo-placeholder');">
+                            <span>Foto 3</span>
+                        </div>
+                        <div class="member-info">
+                            <h3>Ratna Nila Oktavianti</h3>
+                            <p>UI/UX Designer</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== MODAL SIGN LANGUAGE ==================== -->
+    <div id="sign-modal" class="modal" aria-hidden="true" onclick="closeSignModal(event)">
+        <div class="modal-content">
+            <button class="modal-close" type="button" onclick="closeSignModal()">×</button>
+            <p class="small-label">SIGN LANGUAGE</p>
+            <h2 id="modal-letter">A</h2>
+            <div class="sign-image-wrapper">
+                <img id="sign-image" src="" alt="Contoh bahasa isyarat">
+                <div id="sign-image-placeholder" class="sign-image-placeholder">
+                    <span>Gambar belum tersedia</span>
+                    <small>Tambahkan gambar ke folder assets/signs/</small>
+                </div>
+            </div>
+            <p id="modal-description">
+                Contoh gerakan untuk alphabet yang dipilih.
+            </p>
+        </div>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand">Signa</div>
+                <p>Website pengenalan alphabet bahasa isyarat berbasis machine learning.</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#beranda" onclick="showPage('beranda')">Beranda</a>
+                <a href="#tentang-kami" onclick="showPage('tentang-kami')">Tentang Kami</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Signa Team</span>
+            <span>Dibuat untuk project Software Engineering</span>
+        </div>
+    </footer>
+
+    <!-- File JavaScript utama -->
+    <script src="script.js"></script>
+</body>
+</html>

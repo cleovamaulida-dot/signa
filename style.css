@@ -1,0 +1,1823 @@
+/* ==================== RESET ==================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f8f9fc;
+    color: #252330;
+    line-height: 1.6;
+}
+
+img,
+canvas,
+video {
+    max-width: 100%;
+}
+
+main,
+section,
+div,
+header,
+footer,
+article {
+    min-width: 0;
+}
+
+button,
+a {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* ==================== THEME COLORS ==================== */
+
+/*
+    Warna utama diambil dari gradasi logo:
+    biru → cyan
+*/
+
+:root {
+    --blue: #2454c6;
+    --cyan: #24bfd0;
+    --blue-dark: #172b70;
+
+    --text: #252330;
+    --muted: #77727f;
+
+    --background: #f8f9fc;
+    --card: #ffffff;
+    --border: #e4e7ee;
+
+    --logo-gradient: linear-gradient(
+        135deg,
+        #2454c6 0%,
+        #2489cf 48%,
+        #24bfd0 100%
+    );
+}
+
+
+/* ==================== NAVBAR ==================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    min-height: 76px;
+
+    padding: 0 7%;
+
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid var(--border);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+
+/* Logo dan nama website */
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+/* Container logo */
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+}
+
+
+/* Gambar logo */
+
+.brand-logo img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+
+/* Menu navbar */
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+
+    gap: 34px;
+}
+
+
+/* Link navbar */
+
+.nav-link {
+    position: relative;
+
+    padding: 26px 0;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: color 0.2s ease;
+}
+
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text);
+}
+
+
+/* Garis gradient di bawah menu aktif */
+
+.nav-link.active::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    bottom: 17px;
+    left: 0;
+
+    height: 2px;
+
+    border-radius: 10px;
+
+    background: var(--logo-gradient);
+}
+
+
+/* ==================== PAGE ==================== */
+
+.page {
+    display: none;
+
+    width: 86%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    /* Ruang untuk navbar fixed */
+    padding: 150px 0 100px;
+}
+
+
+.active-page {
+    display: block;
+}
+
+
+/* ==================== HERO ==================== */
+
+.hero {
+    margin-bottom: 42px;
+}
+
+
+/* Tulisan kecil di atas heading */
+
+.eyebrow,
+.small-label {
+    margin-bottom: 7px;
+
+    color: #78839a;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+}
+
+
+/* Heading utama */
+
+.hero h1,
+.about-header h1 {
+    font-size: clamp(38px, 5vw, 66px);
+
+    line-height: 1.04;
+
+    letter-spacing: -2.5px;
+}
+
+
+/* Highlight heading menggunakan gradient logo */
+
+.hero h1 span,
+.about-header h1 span {
+    background: var(--logo-gradient);
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* Deskripsi hero */
+
+.hero-description {
+    max-width: 650px;
+
+    margin-top: 22px;
+
+    color: #706b78;
+
+    font-size: 16px;
+}
+
+
+/* ==================== RECOGNITION ==================== */
+
+.recognition-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.75fr)
+        minmax(0, 1fr);
+
+    width: 100%;
+    max-width: 100%;
+
+    gap: 24px;
+
+    align-items: stretch;
+}
+
+
+/* Card kamera */
+
+.camera-card,
+.main-result,
+.all-results,
+.about-box,
+.member-card,
+.instruction-section {
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 12px 35px rgba(37, 35, 48, 0.045);
+}
+
+
+/* ==================== CAMERA CARD ==================== */
+
+.camera-card {
+    position: relative;
+
+    min-width: 0;
+
+    padding: 24px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+}
+
+
+/* Garis gradient di bagian atas card */
+
+.camera-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background: var(--logo-gradient);
+}
+
+
+/* Header card */
+
+.card-heading,
+.result-title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.card-heading h2,
+.result-title-row h2 {
+    font-size: 22px;
+    line-height: 1.1;
+}
+
+
+/* Status kamera */
+
+.status-badge {
+    padding: 7px 10px;
+
+    border-radius: 999px;
+
+    background: #eef0f5;
+
+    color: #716c79;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* Status kamera aktif */
+
+.status-badge.live {
+    background: #e5f8fa;
+
+    color: #168c9b;
+}
+
+
+/* ==================== CAMERA FRAME ==================== */
+
+.camera-frame {
+    display: grid;
+    place-items: center;
+
+    width: 100%;
+
+    min-width: 0;
+    min-height: 430px;
+
+    margin-top: 20px;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background: #eef0f5;
+}
+
+
+.webcam-container {
+    display: grid;
+    place-items: center;
+
+    width: 100%;
+
+    min-width: 0;
+    min-height: 430px;
+}
+
+
+/* Video dari Teachable Machine */
+
+.webcam-container canvas {
+    display: block;
+
+    width: min(100%, 650px) !important;
+    max-width: 100% !important;
+
+    height: auto !important;
+
+    aspect-ratio: 4 / 3;
+
+    object-fit: cover;
+
+    border-radius: 14px;
+}
+
+
+/* Placeholder kamera */
+
+.camera-placeholder {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 280px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    color: #77727f;
+}
+
+
+/* Icon kamera */
+
+.camera-icon {
+    display: grid;
+    place-items: center;
+
+    width: 62px;
+    height: 62px;
+
+    margin-bottom: 16px;
+
+    border: 1px solid #d8dce5;
+
+    border-radius: 18px;
+
+    font-size: 32px;
+}
+
+
+.camera-placeholder p {
+    color: #403c48;
+
+    font-weight: 700;
+}
+
+
+.camera-placeholder span {
+    margin-top: 4px;
+
+    font-size: 13px;
+}
+
+
+/* ==================== CAMERA BUTTONS ==================== */
+
+.camera-actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+
+.primary-button,
+.secondary-button {
+    cursor: pointer;
+
+    border: 0;
+    border-radius: 11px;
+
+    padding: 12px 18px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+/* Tombol utama gradient */
+
+.primary-button {
+    background: var(--logo-gradient);
+
+    color: #fff;
+
+    box-shadow:
+        0 8px 20px rgba(36, 137, 207, 0.22);
+}
+
+
+.primary-button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 10px 25px rgba(36, 137, 207, 0.28);
+}
+
+
+/* Tombol secondary */
+
+.secondary-button {
+    background: #eef0f5;
+
+    color: #4d4854;
+}
+
+
+.secondary-button:hover {
+    background: #e4e7ee;
+}
+
+
+.secondary-button:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.5;
+}
+
+
+/* ==================== RESULTS 4:3 ==================== */
+
+.results-panel {
+    display: grid;
+
+    grid-template-rows:
+        145px
+        minmax(0, 1fr);
+
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+    min-height: 0;
+
+    gap: 18px;
+
+    aspect-ratio: 4 / 3;
+}
+
+
+/* Card hasil */
+
+.main-result,
+.all-results {
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+
+    padding: 22px;
+
+    border-radius: 20px;
+}
+
+
+/* ==================== MAIN PREDICTION ==================== */
+
+.prediction-letter {
+    margin-top: 8px;
+
+    color: var(--blue-dark);
+
+    font-size: clamp(42px, 5vw, 62px);
+
+    font-weight: 900;
+
+    line-height: 0.9;
+
+    letter-spacing: -3px;
+}
+
+
+#prediction-name {
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+#prediction-confidence {
+    color: var(--blue);
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+
+#class-count {
+    color: #99939f;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* ==================== PREDICTION LIST ==================== */
+
+.prediction-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 7px;
+
+    height: calc(100% - 52px);
+
+    margin-top: 14px;
+
+    padding-right: 3px;
+
+    overflow-y: auto;
+}
+
+
+/* Item alphabet */
+
+.prediction-item {
+    display: grid;
+
+    grid-template-columns:
+        28px
+        minmax(0, 1fr)
+        auto;
+
+    align-items: center;
+
+    gap: 8px;
+
+    min-width: 0;
+
+    padding: 8px;
+
+    cursor: pointer;
+
+    border: 1px solid #ebe8ef;
+
+    border-radius: 9px;
+
+    background: #fafbfc;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.prediction-item:hover,
+.prediction-item.selected {
+    background: #f0f7fb;
+
+    border-color: #b9e4eb;
+
+    transform: translateY(-1px);
+}
+
+
+/* Kotak huruf */
+
+.alphabet-badge {
+    display: grid;
+    place-items: center;
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 8px;
+
+    background: var(--logo-gradient);
+
+    color: #fff;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+
+/* Nama alphabet */
+
+.prediction-class {
+    min-width: 0;
+
+    overflow: hidden;
+
+    color: #48434f;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* Persentase */
+
+.prediction-percent {
+    color: #77727f;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* Saat belum ada hasil */
+
+.empty-result {
+    grid-column: 1 / -1;
+
+    padding: 20px;
+
+    color: #99939f;
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+
+/* ==================== INSTRUCTION ==================== */
+
+.instruction-section {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    margin-top: 24px;
+
+    padding: 20px;
+
+    border-radius: 18px;
+}
+
+
+.instruction-icon {
+    display: grid;
+
+    flex: 0 0 auto;
+
+    place-items: center;
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid #cfe5ea;
+
+    border-radius: 50%;
+
+    color: var(--blue);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+.instruction-section h3 {
+    font-size: 14px;
+}
+
+
+.instruction-section p {
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* ==================== ABOUT ==================== */
+
+.about-header {
+    max-width: 830px;
+}
+
+
+.about-header > p:last-child {
+    max-width: 720px;
+
+    margin-top: 24px;
+
+    color: #706b78;
+
+    font-size: 15px;
+}
+
+
+/* ==================== ABOUT BOX ==================== */
+
+.about-description {
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 18px;
+
+    margin-top: 55px;
+}
+
+
+.about-box {
+    position: relative;
+
+    min-height: 190px;
+
+    padding: 26px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+}
+
+
+.about-number {
+    color: var(--blue);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.about-box h2 {
+    margin-top: 25px;
+
+    font-size: 22px;
+}
+
+
+.about-box p {
+    max-width: 460px;
+
+    margin-top: 8px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* ==================== MEMBERS ==================== */
+
+.members-section {
+    margin-top: 70px;
+}
+
+
+.section-heading h2 {
+    margin-top: 2px;
+
+    font-size: 30px;
+}
+
+
+.member-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-top: 22px;
+}
+
+
+.member-card {
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.member-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 16px 35px rgba(37, 35, 48, 0.08);
+}
+
+
+/* Foto anggota */
+
+.member-photo {
+    width: 220px;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    margin: 20px auto 0;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+
+.member-photo > span {
+    display: none;
+
+    color: #918b97;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+.member-photo.photo-placeholder > span {
+    display: block;
+}
+
+
+.member-info {
+    padding: 19px 20px 21px;
+}
+
+
+.member-info h3 {
+    font-size: 17px;
+}
+
+
+.member-info p {
+    margin-top: 3px;
+
+    color: #88828e;
+
+    font-size: 12px;
+}
+
+
+/* ==================== MODAL ==================== */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 300;
+
+    display: none;
+
+    place-items: center;
+
+    padding: 20px;
+
+    background: rgba(25, 23, 32, 0.55);
+}
+
+
+.modal.show {
+    display: grid;
+}
+
+
+.modal-content {
+    position: relative;
+
+    width: min(440px, 100%);
+
+    padding: 28px;
+
+    border-radius: 22px;
+
+    background: #fff;
+
+    text-align: center;
+}
+
+
+.modal-close {
+    position: absolute;
+
+    top: 12px;
+    right: 14px;
+
+    width: 34px;
+    height: 34px;
+
+    cursor: pointer;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: #eef0f5;
+
+    color: #4d4854;
+
+    font-size: 22px;
+}
+
+
+.modal-close:hover {
+    background: #e2e8f0;
+
+    color: var(--blue);
+}
+
+
+.modal-content h2 {
+    margin-top: -3px;
+
+    font-size: 48px;
+
+    background: var(--logo-gradient);
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* ==================== SIGN LANGUAGE IMAGE ==================== */
+
+.sign-image-wrapper {
+    display: grid;
+
+    place-items: center;
+
+    width: 100%;
+
+    min-height: 250px;
+
+    margin-top: 12px;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background: #f0f2f6;
+}
+
+
+.sign-image-wrapper img {
+    display: none;
+
+    width: 100%;
+
+    max-height: 320px;
+
+    object-fit: contain;
+}
+
+
+.sign-image-placeholder {
+    display: flex;
+
+    flex-direction: column;
+
+    color: #8a8591;
+}
+
+
+.sign-image-placeholder small {
+    margin-top: 3px;
+
+    font-size: 10px;
+}
+
+
+#modal-description {
+    margin-top: 13px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+/* ==================== FOOTER ==================== */
+
+.footer {
+    position: relative;
+
+    width: 100%;
+    max-width: 100vw;
+
+    padding: 48px 7% 25px;
+
+    background: #17234c;
+
+    color: #fff;
+}
+
+
+/* Garis gradient atas footer */
+
+.footer::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background: var(--logo-gradient);
+}
+
+
+.footer-inner {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+}
+
+
+.footer-brand {
+    font-size: 20px;
+
+    font-weight: 800;
+}
+
+
+.footer-inner p {
+    max-width: 430px;
+
+    margin-top: 7px;
+
+    color: #b9c0d2;
+
+    font-size: 12px;
+}
+
+
+.footer-links {
+    display: flex;
+
+    gap: 25px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+.footer-links a {
+    transition: color 0.2s ease;
+}
+
+
+.footer-links a:hover {
+    color: var(--cyan);
+}
+
+
+.footer-bottom {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 38px auto 0;
+
+    padding-top: 17px;
+
+    border-top: 1px solid #3c486c;
+
+    color: #929bb4;
+
+    font-size: 10px;
+}
+
+
+/* ==================== RESPONSIVE TABLET ==================== */
+
+@media (max-width: 900px) {
+
+    .recognition-layout {
+        grid-template-columns:
+            minmax(0, 1fr);
+    }
+
+
+    .results-panel {
+        grid-template-rows:
+            auto
+            auto;
+
+        aspect-ratio: auto;
+
+        min-height: 0;
+    }
+
+
+    .member-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* ==================== RESPONSIVE MOBILE ==================== */
+
+@media (max-width: 650px) {
+
+    /* Navbar */
+
+    .navbar {
+        width: 100%;
+        max-width: 100vw;
+
+        padding: 0 5%;
+    }
+
+
+    .brand {
+        min-width: 0;
+    }
+
+
+    .brand span {
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+        white-space: nowrap;
+    }
+
+
+    .nav-menu {
+        gap: 18px;
+
+        min-width: 0;
+    }
+
+
+    .nav-link {
+        white-space: nowrap;
+    }
+
+
+    /* Page */
+
+    .page {
+        width: 90%;
+        max-width: 90%;
+
+        margin-right: auto;
+        margin-left: auto;
+
+        padding-top: 52px;
+    }
+
+
+    .hero h1,
+    .about-header h1 {
+        letter-spacing: -1.5px;
+    }
+
+
+    /* Recognition */
+
+    .recognition-layout,
+    .camera-card,
+    .results-panel,
+    .main-result,
+    .all-results {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+
+    /* Camera */
+
+    .camera-card,
+    .main-result,
+    .all-results {
+        padding: 18px;
+    }
+
+
+    .camera-frame,
+    .webcam-container {
+        width: 100%;
+        max-width: 100%;
+
+        min-width: 0;
+        min-height: 0;
+    }
+
+
+    .webcam-container canvas {
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        height: auto !important;
+    }
+
+
+    /* List alphabet */
+
+    .prediction-list {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    /* About */
+
+    .about-description,
+    .member-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    /* Footer */
+
+    .footer {
+        width: 100%;
+        max-width: 100vw;
+
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+
+    .footer-inner,
+    .footer-bottom {
+        flex-direction: column;
+    }
+
+
+    .footer-bottom {
+        gap: 5px;
+    }
+
+    /* ==================== ANIMATIONS ==================== */
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* ==================== PAGE TRANSITION ==================== */
+
+/* Animasi saat halaman dibuka */
+.active-page {
+    animation: pageFade 0.45s ease both;
+}
+
+@keyframes pageFade {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ==================== NAVBAR ==================== */
+
+/* Logo sedikit membesar saat hover */
+.brand {
+    transition: transform 0.25s ease;
+}
+
+.brand:hover {
+    transform: translateY(-1px);
+}
+
+.brand-logo {
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease;
+}
+
+.brand:hover .brand-logo {
+    transform: scale(1.06) rotate(-2deg);
+    filter: drop-shadow(0 5px 10px rgba(36, 137, 207, 0.2));
+}
+
+
+/* Animasi underline navbar */
+.nav-link::after {
+    transform: scaleX(0);
+    transform-origin: center;
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+
+    opacity: 0;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+
+/* ==================== HERO ==================== */
+
+/* Hero muncul sedikit dari bawah */
+.hero {
+    animation: heroUp 0.65s ease both;
+}
+
+@keyframes heroUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Gradient text bergerak pelan */
+.hero h1 span,
+.about-header h1 span {
+    background-size: 200% 200%;
+
+    animation: gradientMove 5s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+/* ==================== CAMERA CARD ==================== */
+
+.camera-card {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.camera-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 18px 40px rgba(37, 35, 48, 0.08);
+}
+
+
+/* Camera frame saat hover */
+.camera-frame {
+    transition:
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+.camera-card:hover .camera-frame {
+    box-shadow:
+        inset 0 0 0 1px rgba(36, 191, 208, 0.18);
+}
+
+
+/* ==================== BUTTON ==================== */
+
+.primary-button {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Efek cahaya lewat di tombol */
+.primary-button::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.6s ease;
+}
+
+.primary-button:hover::before {
+    left: 140%;
+}
+
+
+/* Tombol ditekan */
+.primary-button:active,
+.secondary-button:active {
+    transform: scale(0.97);
+}
+
+
+/* ==================== PREDICTION ==================== */
+
+/* Huruf hasil utama muncul */
+.prediction-letter {
+    animation: predictionAppear 0.4s ease;
+}
+
+@keyframes predictionAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Item alphabet */
+.prediction-item {
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.prediction-item:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 14px rgba(36, 137, 207, 0.08);
+}
+
+
+/* Badge huruf */
+.alphabet-badge {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.prediction-item:hover .alphabet-badge {
+    transform: scale(1.08);
+
+    box-shadow:
+        0 5px 12px rgba(36, 137, 207, 0.2);
+}
+
+
+/* ==================== INSTRUCTION ==================== */
+
+.instruction-section {
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.instruction-section:hover {
+    transform: translateY(-2px);
+
+    border-color: #c5e8ed;
+}
+
+.instruction-icon {
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+.instruction-section:hover .instruction-icon {
+    transform: rotate(8deg) scale(1.05);
+
+    background: #eefbfc;
+}
+
+
+/* ==================== ABOUT ==================== */
+
+.about-box {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.about-box:hover {
+    transform: translateY(-4px);
+
+    border-color: #c9e7ec;
+
+    box-shadow:
+        0 16px 35px rgba(37, 35, 48, 0.08);
+}
+
+
+/* Nomor 01 / 02 */
+.about-number {
+    transition:
+        letter-spacing 0.3s ease,
+        color 0.3s ease;
+}
+
+.about-box:hover .about-number {
+    letter-spacing: 2px;
+
+    color: var(--cyan);
+}
+
+
+/* ==================== MEMBER CARDS ==================== */
+
+.member-card {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.member-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #c9e7ec;
+
+    box-shadow:
+        0 18px 40px rgba(37, 35, 48, 0.1);
+}
+
+
+/* Foto sedikit zoom */
+.member-photo {
+    overflow: hidden;
+}
+
+.member-photo img {
+    transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
+}
+
+.member-card:hover .member-photo img {
+    transform: scale(1.05);
+}
+
+
+/* ==================== MODAL ==================== */
+
+/* Overlay */
+.modal {
+    opacity: 0;
+
+    transition:
+        opacity 0.25s ease;
+}
+
+.modal.show {
+    opacity: 1;
+}
+
+
+/* Isi modal */
+.modal-content {
+    transform: translateY(15px) scale(0.96);
+
+    transition:
+        transform 0.3s ease;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0) scale(1);
+}
+
+
+/* Tombol close */
+.modal-close {
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.modal-close:hover {
+    transform: rotate(90deg);
+}
+
+
+/* ==================== FOOTER ==================== */
+
+.footer-links a {
+    position: relative;
+}
+
+
+/* Underline footer */
+.footer-links a::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    bottom: -5px;
+    left: 0;
+
+    height: 1px;
+
+    background: var(--cyan);
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform 0.25s ease;
+}
+
+.footer-links a:hover::after {
+    transform: scaleX(1);
+}
+
+
+/* ==================== ACCESSIBILITY ==================== */
+
+/* Kurangi animasi kalau user memilih reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+}
